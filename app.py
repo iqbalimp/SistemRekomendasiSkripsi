@@ -108,7 +108,7 @@ if nav == '📊 Grafik Dosen Pembimbing':
         "series": [
             {
                 "name": "Jumlah Skripsi",
-                "top": "80%",
+                "top": "60%",
                 "type": "pie",
                 "radius": ["50%", "100%"],  # Membuat pie chart menjadi donut
                 "avoidLabelOverlap": False,
@@ -222,8 +222,8 @@ if nav == '🔍 Rekomendasi Skripsi':
     data_skripsi = pd.read_csv('cleaned_data_skripsi.csv')
 
     # Membuat TF-IDF untuk judul dan abstrak
-    tfidf_vectorizer_judul = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, max_df=0.85, sublinear_tf=True)
-    tfidf_vectorizer_abstrak = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, max_df=0.85, sublinear_tf=True)
+    tfidf_vectorizer_judul = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0.0, max_df=0.85, sublinear_tf=True)
+    tfidf_vectorizer_abstrak = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0.0, max_df=0.85, sublinear_tf=True)
 
     # Membuat matriks TF-IDF
     tfidf_matrix_judul = tfidf_vectorizer_judul.fit_transform(data_skripsi['cleaned_judul'])
