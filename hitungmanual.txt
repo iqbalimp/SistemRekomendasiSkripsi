@@ -1,0 +1,266 @@
+D1 = "manajemen data yang terbaik mengoptimalkan sistem informasi"
+D2 = "manajemen data yang baik dapat meningkatkan kinerja sistem informasi"
+D3 = "analisis sentimen memiliki peran penting dalam evaluasi sistem informasi"
+D4 = "analisis sentimen yang efektif dalam evaluasi kinerja sistem informasi"
+
+
+
+D1 D2
+1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,0,0,0
+1+1+1+1+1+1+1+1+0+0+0+0+0+0+0+0+1+0+0+0
+
+1,1,0,0,1,1,1,0,1,1,1,0,0,0,0,0,1,0,0,0
+1+1+0+0+1+1+1+0+1+1+1+0+0+0+0+0+1+0+0+0
+
+(1*1)+(1*1)+(1*0)+(1*0)+(1*1)+(1*1)+(1*1)+(1*0)+(0*1)+(0*1)+(0*1)+(0*0)+(0*0)+(0*0)+(0*0)+(0*0)+(1*1)+(0*0)+(0*0)+(0*0) / (sqrt(9) * sqrt(9))
+6 / 9 = 0.66
+
+
+D1 D3
+1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,0,0,0
+1+1+1+1+1+1+1+1+0+0+0+0+0+0+0+0+1+0+0+0
+
+1,1,0,0,0,0,1,0,0,0,0,1,1,1,1,1,1,1,0,0
+1+1+0+0+0+0+1+0+0+0+0+1+1+1+1+1+1+1+0+0
+
+(1*1)+(1*1)+(1*0)+(1*0)+(1*0)+(1*0)+(1*1)+(1*0)+(0*0)+(0*0)+(0*0)+(0*1)+(0*1)+(0*1)+(0*1)+(0*1)+(1*1)+(0*1)+(0*0)+(0*0) / (sqrt(9) * sqrt(10))
+4 / 9,48 = 0.42
+
+
+
+D1 D4
+1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,0,0,0
+1+1+1+1+1+1+1+1+0+0+0+0+0+0+0+0+1+0+0+0
+
+1,1,0,0,0,0,1,0,0,0,0,1,1,1,0,0,1,0,1,1
+1+1+0+0+0+0+1+0+0+0+0+1+1+1+0+0+1+0+1+1
+
+(1*1)+(1*1)+(1*0)+(1*0)+(1*0)+(1*0)+(1*1)+(1*0)+(0*0)+(0*0)+(0*0)+(0*1)+(0*1)+(0*1)+(0*0)+(0*0)+(1*1)+(0*0)+(0*1)+(0*1) / (sqrt(9) * sqrt(9))
+4 / 9 = 0.44
+
+
+log(4/4) = 0
+log(4/4) = 0
+log(4/1) = 0.6
+log(4/2) = 0.3
+log(4/2) = 0.3
+log(4/2) = 0.3
+log(4/1) = 0.6
+log(4/1) = 0.6
+log(4/1) = 0.6
+log(4/1) = 0.6
+log(4/1) = 0.6
+log(4/2) = 0.3
+log(4/2) = 0.3
+log(4/2) = 0.3
+log(4/2) = 0.3
+log(4/2) = 0.3
+log(4/2) = 0.3
+log(4/2) = 0.3
+log(4/1) = 0.6
+log(4/1) = 0.6
+
+
+0 ,0 ,0.075 ,0 ,0 ,0 ,0.075 ,0.075 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0
+
+0, 0, 0, 0.042, 0.042, 0.042, 0, 0, 0.085, 0.085, 0.085, 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.042, 0.042, 0.042, 0.042, 0.042, 0.042, 0.042, 0, 0
+
+0, 0, 0, 0, 0, 0.042, 0, 0, 0, 0, 0, 0.042, 0.042, 0, 0, 0, 0.042, 0, 0.085, 0.085
+
+0, 0, 0, 0, 0, 0.042, 0, 0, 0, 0, 0, 0.042, 0.042, 0, 0, 0, 0.042, 0, 0.085, 0.085
+
+
+D1
+[0 ,0 ,0.075 ,0 ,0 ,0 ,0.075 ,0.075 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0]
+
+D2
+[0, 0, 0, 0.042, 0.042, 0.042, 0, 0, 0.085, 0.085, 0.085, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+D3
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.042, 0.042, 0.042, 0.042, 0.042, 0.042, 0.042, 0, 0]
+
+D4
+[0, 0, 0, 0, 0, 0.042, 0, 0, 0, 0, 0, 0.042, 0.042, 0, 0, 0, 0.042, 0, 0.085, 0.085]
+
+
+D1
+[0.075, 0, 0.016, 0, 0, 0.075, 0, 0, 0, 0]
+D2
+[0, 0, 0.02, 0, 0, 0, 0.05, 0.1, 0, 0]
+D3
+[0, 0, 0.02, 0, 0, 0, 0, 0, 0.1, 0.1]
+D4
+[0, 0, 0, 0, 0, 0, 0.05, 0, 0, 0]
+
+
+
+Salah satu topik yang sedang ramai diperbincangkan pada media sosial Twitter adalah tentang peralihan dari mobil konvensional menuju mobil listrik di Indonesia. Salah satu hal yang menjadi tolak ukur keberhasilannya adalah bagaimana sentimen masyarakat mengenai mobil listrik di Indonesia. Penelitian ini memiliki tujuan utama untuk melihat efektivitas dan mendapatkan kinerja metode Random Forest dalam melakukan analisis sentimen terkait dengan topik peralihan mobil listrik serta mengetahui reaksi masyarakat terhadap kebijakan peralihan mobil listrik di Indonesia. Diperoleh data sejumlah 7774 tweets. Setelah melalui proses filtrasi, data yang dihasilkan adalah 2012 yang digunakan untuk melatih model. Tahapan yang dilakukan pada penelitian ini menggunakan model penelitian data science CRISP-DM (Cross-Industry Standard Process for Data Mining). Pada penelitian ini digunakan teknik Feature extraction TF-IDF (Term Frequency-Inverse Document Frequency). Digunakan juga teknik SMOTE (Synthetic Minority Over-sampling Technique) yang merupakan bagian dari skenario pengujian. Pada skenario pertama, dengan menggunakan 1675 data yang dihasilkan setelah proses filtrasi, didapatkan akurasi sebesar 77.49%. Pada skenario kedua, menggunakan 1788 data yang didapatkan setelah penerapan teknik SMOTE didapatkan akurasi sebesar 77.74%. Pada skenario ketiga, menggunakan 1048 data yang didapatkan setelah proses filtrasi dan K-means clustering dengan nilai k=4 didapatkan hasil akurasi sebesar 98.47%. Pada skenario keempat, dengan menggunakan 1544 data yang didapatkan setelah proses filtrasi, K-means clustering dengan nilai k=4 dan SMOTE, didapatkan hasil akurasi sebesar 99.55%. pada skenario kelima, dilakukan evaluasi tanpa menerapkan cross-validation, dengan menggunakan 1675 data, hasil akurasi yang didapatkan adalah 77.34%. Pada skenario pengujian keenam, hasil menunjukkan suatu prediksi terhadap opini masyarakat mengenai peralihan mobil listrik di Indonesia cenderung bersifat negatif.
+
+
+dokument 1
+Flip, Neobank, dan Bank Jago merupakan inovasi Financial Technology yang memberikan fasilitas pembebasan biaya transfer antar bank. Seiring perkembangan waktu dan peningkatan jumlah pengguna, berbagai opini publik muncul dalam bentuk ulasan pada platform Google Play Store. Penelitian ini memanfaatkan metode web scraping dengan menggunakan bahasa pemrograman Python untuk mengambil data ulasan. Dalam implementasinya, klasifikasi dilakukan dengan metode Support Vector Machine (SVM) dan Particle Swarm Optimization (PSO). Data ulasan menjalani proses pelabelan, tahap preprocessing, dan pembobotan kata dengan TF-IDF. aplikasi Neobank mencapai akurasi tertinggi pada model SVM+PSO sebesar 96% dan aplikasi Bank Jago sebesar 97%.
+dokument 2
+Penelitian ini memiliki tujuan utama untuk melihat efektivitas dan mendapatkan kinerja metode Random Forest dalam melakukan analisis sentimen terkait dengan topik Tahapan yang dilakukan pada penelitian ini menggunakan model penelitian data science CRISP-DM (Cross-Industry Standard Process for Data Mining). Pada penelitian ini digunakan teknik Feature extraction TF-IDF (Term Frequency-Inverse Document Frequency). hasil akurasi yang didapatkan adalah 77.34%. Pada skenario pengujian keenam, hasil menunjukkan suatu prediksi terhadap opini masyarakat mengenai peralihan mobil listrik di Indonesia cenderung bersifat negatif.
+dokument 3
+Arus mudik menimbulkan stigma positif dan negatif karena melibatkan banyak unsur mulai aparat pemerintah maupun masyarakat. Metode yang digunakan untuk untuk analisis sentimen menggunakan algoritma KNearest Neighbors (KNN) dan Chi Square Harapan penelitian ini mampu memberikan informasi yang bermanfaat untuk mengetahui tingkat nilai akurasi Dan untuk 90% mendapatkan nilai rata-rata akurasi tertinggi pada K-Fold ke 5 yaitu 96.1%. dan terendah pada K-Fold ke 2 93.1%.
+dokument 4
+Penelitian ini bertujuan mengetahui opini pengunjung wisata pantai tlangoh dengan cara mengklasifikasikan opini tersebut menggunakan metode K-Nearest Neighbor karena metode tersebut cukup baik dalam mengklasifikasikan data teks. Pada penelitian ini menggunakan dua metrik jarak yaitu Cosine Similarity dan Euclidean Distance untuk melihat akurasi dari perbandingan kedua metrik jarak tersebut. Hasil akurasi terbaik didapatkan dari euclidean distance dengan nilai akurasi sebesar 55%, presisi 50% dan recall 48%. Sedangkan metrik jarak cosine similarity didapatkan akurasi sebesar 23%, presisi 64%, dan recall 62%. Penelitian ini mampu memberikan informasi yang bermanfaat untuk mengetahui tingkat akuasi terbaik dalam perbandingan cosine similarity dan euclidean distance.
+dokument 5
+Penelitian ini mengeksplorasi analisis sentimen masyarakat terhadap migrasi televisi menggunakan model Bidirectional Long Short-Term Memory (BiLSTM). Dataset berisi 9.597 data tweet dari Twitter, diperoleh dengan library SNScrape melalui proses scraping. Model BiLSTM digunakan untuk mengekstraksi sentimen positif, negatif, dan netral dari data tweet. Dataset ini diperoleh melalui proses sampling Slovin dengan tingkat error 2%, untuk memastikan representativitas sampel yang optimal dengan total 3.098 data tweet, penelitian ini menerapkan rasio split data 80:20, dengan 2.478 data untuk pelatihan model dan 620 data untuk pengujian. Teknik validasi silang (crossvalidation) 10 kali memberikan reliabilitas hasil yang baik. Hasil eksperimen mencapai rata-rata akurasi 91.36%, menunjukkan kinerja yang impresif. 
+
+
+['flip', 'neobank', 'dan', 'bank', 'jago', 'merupakan', 'inovasi', 'financial', 'technology', 'yang', 'memberikan', 'fasilitas', 'pembebasan', 'biaya', 'transfer', 'antar', 'bank', 'seiring', 'perkembangan', 'waktu', 'dan', 'peningkatan', 'jumlah', 'pengguna', 'berbagai', 'opini', 'publik', 'muncul', 'dalam', 'bentuk', 'ulasan', 'pada', 'platform', 'google', 'play', 'store', 'penelitian', 'ini', 'memanfaatkan', 'metode', 'web', 'scraping', 'dengan', 'menggunakan', 'bahasa', 'pemrograman', 'python', 'untuk', 'mengambil', 'data', 'ulasan', 'dalam', 'implementasinya', 'klasifikasi', 'dilakukan', 'dengan', 'metode', 'support', 'vector', 'machine']
+
+['penelitian', 'ini', 'memiliki', 'tujuan', 'utama', 'untuk', 'melihat', 'efektivitas', 'dan', 'mendapatkan', 'kinerja', 'metode', 'random', 'forest', 'dalam', 'melakukan', 'analisis', 'sentimen', 'terkait', 'dengan', 'topik', 'tahapan', 'yang', 'dilakukan', 'pada', 'penelitian', 'ini', 'menggunakan', 'model', 'penelitian', 'data', 'science', 'crisp-dm', 'cross-industry', 'standard', 'process', 'for', 'data', 'mining', 'pada', 'penelitian', 'ini', 'digunakan', 'teknik', 'feature', 'extraction', 'tfidf', 'term', 'frequency-inverse', 'document', 'frequency', 'hasil', 'akurasi', 'yang', 'didapatkan', 'adalah', '77.3,4%', 'pada', 'skenario', 'pengujian', 'keenam', 'hasil', 'menunjukkan', 'suatu', 'prediksi', 'terhadap', 'opini', 'masyarakat', 'mengenai', 'peralihan', 'mobil', 'listrik', 'di', 'indonesia', 'cenderung', 'bersifat', 'negatif']
+
+
+Dokumen D1:
+Tokenisasi: ["manajemen", "data", "terbaik", "mengoptimalkan", "sistem", "informasi"]
+Filtering: ["manajemen", "data", "terbaik", "mengoptimalkan", "sistem", "informasi"]
+Stemming: ["manajemen", "data", "baik", "optimalkan", "sistem", "informasi"]
+Dokumen D2:
+Tokenisasi: ["manajemen", "data", "baik", "dapat", "meningkatkan", "kinerja", "sistem", "informasi"]
+Filtering: ["manajemen", "data", "baik", "dapat", "meningkatkan", "kinerja", "sistem", "informasi"]
+Stemming: ["manajemen", "data", "baik", "dapat", "tingkat", "kinerja", "sistem", "informasi"]
+Dokumen D3:
+Tokenisasi: ["analisis", "sentimen", "memiliki", "peran", "penting", "dalam", "evaluasi", "sistem", "informasi"]
+Filtering: ["analisis", "sentimen", "peran", "penting", "evaluasi", "sistem", "informasi"]
+Stemming: ["analisis", "sentimen", "milik", "peran", "penting", "evaluasi", "sistem", "informasi"]
+Dokumen D4:
+Tokenisasi: ["analisis", "sentimen", "yang", "efektif", "dalam", "evaluasi", "kinerja", "sistem", "informasi"]
+Filtering: ["analisis", "sentimen", "efektif", "evaluasi", "kinerja", "sistem", "informasi"]
+Stemming: ["analisis", "sentimen", "efektif", "evaluasi", "kinerja", "sistem", "informasi"]
+
+D1 = "manajemen data yang terbaik mengoptimalkan sistem informasi"
+D2 = "manajemen data yang baik dapat meningkatkan kinerja sistem informasi"
+D3 = "analisis sentimen memiliki peran penting dalam evaluasi sistem informasi"
+D4 = "analisis sentimen yang efektif dalam evaluasi kinerja sistem informasi"
+
+
+D1 = "manajemen data baik optimalkan sistem informasi"
+D2 = "manajemen data baik dapat tingkat kinerja sistem informasi"
+D3 = "analisis sentimen milik peran penting evaluasi sistem informasi"
+D4 = "analisis sentimen efektif evaluasi kinerja sistem informasi"
+
+1/6	       1/8	        0	            0             log(4/2) = 0.30
+1/6	       1/8	        0	            0             log(4/2) = 0.30
+1/6	       1/8	        0	            0             log(4/2) = 0.30
+1/6	       0	        0	            0             log(4/1) = 0.60
+1/6	       1/8	        1/8	            1/7             log(4/4) = 0
+1/6	       1/8	        1/8	            1/7             log(4/4) = 0
+0	       1/8	        0	            0             log(4/1) = 0.60
+0	       1/8	        0	            0             log(4/1) = 0.60
+0	       1/8	        0	            1/7             log(4/2) = 0.30
+0	       0	        1/8	            1/7             log(4/2) = 0.30
+0	       0	        1/8	            1/7             log(4/2) = 0.30
+0	       0	        1/8	            0             log(4/1) = 0.60
+0	       0	        1/8	            0             log(4/1) = 0.60
+0	       0	        1/8	            0             log(4/1) = 0.60
+0	       0	        0	            1/7             log(4/1) = 0.60
+0	       0	        1/8	            1/7             log(4/2) = 0.30
+
+
+
+(D1)x(D2)   = (0.05*0.037)+(0.05*0.037)+(0.05*0.037)+(0.10*0)+(0*0)+(0*0)+(0*0.075)+(0*0.075)+(0*0.037)+(0*0)+(0*0)+(0*0)+(0*0)+(0*0)+(0*0)+(0*0)
+(D1) X (D3) = (0.05*0)+(0.05*0)+(0.05*0)+(0.10*0)+(0*0)+(0*0)+(0*0)+(0*0)+(0*0)+(0*0.037)+(0*0.037)+(0*0.75)+(0*0.75)+(0*0.75)+(0*0)+(0*0.37)
+D1 = 
+0.05
+0.05
+0.05
+0.10
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+D1 = [0.05,0.05,0.05,0.10,0,0,0,0,0,0,0,0,0,0,0,0]
+D1 = [0.05+0.05+0.05+0.10+0+0+0+0+0+0+0+0+0+0+0+0]
+
+D2 = 
+0.037
+0.037
+0.037
+0
+0
+0
+0.075
+0.075
+0.037
+0
+0
+0
+0
+0
+0
+0
+D2 = [0.037,0.037,0.037,0,0,0,0.075,0.075,0.037,0,0,0,0,0,0,0]
+D2 = [0.037+0.037+0.037+0+0+0+0.075+0.075+0.037+0+0+0+0+0+0+0]
+
+
+D3 =
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.037
+0.037
+0.75
+0.75
+0.75
+0
+0.37
+D3 = [0,0,0,0,0,0,0,0,0,0.037,0.037,0.75,0.75,0.75,0,0.37]
+D3 = [0+0+0+0+0+0+0+0+0+0.037+0.037+0.75+0.75+0.75+0+0.37]
+
+
+
+D4 = 
+0
+0
+0
+0
+0
+0
+0
+0
+0.043
+0.043
+0.043
+0
+0
+0
+0.086
+0.043
+D4 = [0,0,0,0,0,0,0,0,0.043,0.043,0.043,0,0,0,0.086,0.043]
+
+D5
+0+0+0+0+0+0+0+0+0+0.043+0.043+0+0+0+0+0
+
+D3 baru D5
+1/8       0
+1/8       0
+0         0
+0         0
+0         0
+1/8       1/2
+1/8       1/2
+1/8       0
+1/8       0
+1/8       0
+0         0
+1/8       0
+
