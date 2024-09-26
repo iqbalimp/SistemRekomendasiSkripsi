@@ -1,14 +1,14 @@
 import pandas as pd
 import numpy as np
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 import re
 import matplotlib.pyplot as plt
+import streamlit as st
+from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from streamlit_echarts import st_echarts
 
-import streamlit as st
  
 st.set_page_config(page_title="Rekomendasi Skripsi", page_icon=":robot_face:", layout="wide", initial_sidebar_state="expanded")
 
