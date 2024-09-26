@@ -1,13 +1,11 @@
 import pandas as pd
 import numpy as np
-import glob
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 import re
 import matplotlib.pyplot as plt
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
-from wordcloud import WordCloud
 from streamlit_echarts import st_echarts
 
 import streamlit as st
