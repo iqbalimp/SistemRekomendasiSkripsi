@@ -89,7 +89,6 @@ if nav == '📊 Grafik Dosen Pembimbing':
     # Format data untuk pie chart
     pie_data = [{"value": int(count), "name": dospem} for dospem, count in total_dospem_counts.items()]
 
-    zoom_level = st.slider("Zoom Level", min_value=40, max_value=100, value=60, step=5)
     # Pie chart options
     options = {
         "backgroundColor": "white",
@@ -155,7 +154,8 @@ if nav == '📊 Grafik Dosen Pembimbing':
             }
         ]
     }
-
+    zoom_level = st.slider("Zoom Level", min_value=40, max_value=100, value=60, step=5)
+    
     # Tampilkan pie chart menggunakan st_echarts
     st.markdown("### Total Skripsi Dosen Pembimbing")
     st.markdown("Pilih sebuah dosen pembimbing di legenda untuk melihat detailnya.")
