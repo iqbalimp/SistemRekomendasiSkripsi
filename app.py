@@ -88,6 +88,8 @@ if nav == '📊 Grafik Dosen Pembimbing':
     total_dospem_counts = dospem1_count.add(dospem2_count, fill_value=0)
     # Format data untuk pie chart
     pie_data = [{"value": int(count), "name": dospem} for dospem, count in total_dospem_counts.items()]
+
+    zoom_level = st.slider("Zoom Level", min_value=40, max_value=100, value=60, step=5)
     # Pie chart options
     options = {
         "backgroundColor": "white",
@@ -96,20 +98,20 @@ if nav == '📊 Grafik Dosen Pembimbing':
             "subtext": "Dosen Pembimbing",
             "left": "center",
             "top": "top",
-            "padding": [10, 10, 10, 10]
+            "padding": [5, 10, 5, 10]
         },
         "tooltip": {"trigger": "item"},
         "legend": {
             "orient": "horizontal",  # Legend dengan orientasi horizontal
             "top": "50",  # Legend di bawah title (gunakan 'px' untuk penempatan yang tepat)
             "left": "center",  # Posisikan legend di tengah
-            "padding": [10, 5, 10, 5],
+            "padding": [5, 5, 5, 5],
         },
         "series": [
             {
                 "name": "Jumlah Skripsi",
                 "type": "pie",
-                "radius": ["50%", "100%"],  # Membuat pie chart menjadi donut
+                "radius": [f"{zoom_level-20}%", f"{zoom_level}%"],  # Radius dipengaruhi oleh zoom_level
                 "avoidLabelOverlap": False,
                 "label": {
                     "show": True,
@@ -133,39 +135,20 @@ if nav == '📊 Grafik Dosen Pembimbing':
         "media": [
             {
                 "query": {
-                    "maxWidth": 900,
+                    "maxWidth": 900,  # Saat lebar layar kurang dari 900px
                 },
                 "option": {
                     "legend": {
-                        "orient": "horizontal",  # Legend menjadi vertikal di layar kecil
-                        "type": "scroll",  # Tambahkan scroll untuk legend
-                        "left": "left",  # Legend tetap di tengah
-                        "top": "bottom",  # Legend di bagian bawah chart
-                        "padding": [10, 10, 10, 10],
+                        "orient": "horizontal",  
+                        "type": "scroll",  
+                        "left": "center",  
+                        "top": "bottom",  
+                        "padding": [5, 10, 10, 10],
                     },
                     "series": [
                         {
-                            "top": "10%",  # Jarak antara chart dan legend lebih besar
-                            "radius": ["50%", "100%"],  # Ukuran pie chart lebih kecil
-                        }
-                    ]
-                }
-
-            },
-            {
-                "query": {
-                    "minWidth": 901,  # Saat lebar layar lebih besar dari 900px
-                },
-                "option": {
-                    "legend": {
-                        "orient": "horizontal",  # Legend tetap horizontal di layar besar
-                        "type": "scroll",  # Mengaktifkan scroll untuk legend
-                        "top": "50",  # Legend di bawah title
-                    },
-                    "series": [
-                        {
-                            "top": "20%",  # Ukuran pie chart lebih besar pada layar besar
-                            "radius": ["50%", "100%"]
+                            "top": "5%",  # Jarak antara chart dan legend lebih besar
+                            "radius": [f"{zoom_level-30}%", f"{zoom_level}%"],  # Ukuran pie chart lebih kecil
                         }
                     ]
                 }
