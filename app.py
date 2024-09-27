@@ -108,7 +108,6 @@ if nav == '📊 Grafik Dosen Pembimbing':
         "series": [
             {
                 "name": "Jumlah Skripsi",
-                "top": "60%",
                 "type": "pie",
                 "radius": ["50%", "100%"],  # Membuat pie chart menjadi donut
                 "avoidLabelOverlap": False,
@@ -130,6 +129,48 @@ if nav == '📊 Grafik Dosen Pembimbing':
                 "data": pie_data,
             }
         ],
+        "responsive": True,  # Menambahkan logika responsif
+        "media": [
+            {
+                "query": {
+                    "maxWidth": 900,
+                },
+                "option": {
+                    "legend": {
+                        "orient": "horizontal",  # Legend menjadi vertikal di layar kecil
+                        "type": "scroll",  # Tambahkan scroll untuk legend
+                        "left": "left",  # Legend tetap di tengah
+                        "top": "bottom",  # Legend di bagian bawah chart
+                        "padding": [10, 10, 30, 10],
+                    },
+                    "series": [
+                        {
+                            "top": "10%",  # Jarak antara chart dan legend lebih besar
+                            "radius": ["50%", "100%"],  # Ukuran pie chart lebih kecil
+                        }
+                    ]
+                }
+
+            },
+            {
+                "query": {
+                    "minWidth": 901,  # Saat lebar layar lebih besar dari 900px
+                },
+                "option": {
+                    "legend": {
+                        "orient": "horizontal",  # Legend tetap horizontal di layar besar
+                        "type": "scroll",  # Mengaktifkan scroll untuk legend
+                        "top": "50",  # Legend di bawah title
+                    },
+                    "series": [
+                        {
+                            "top": "20%",  # Ukuran pie chart lebih besar pada layar besar
+                            "radius": ["50%", "100%"]
+                        }
+                    ]
+                }
+            }
+        ]
     }
 
     # Tampilkan pie chart menggunakan st_echarts
@@ -212,9 +253,12 @@ if nav == '🔍 Rekomendasi Skripsi':
             judul = data_skripsi.iloc[i]['Judul Skripsi']
             link = data_skripsi.iloc[i]['Link Skripsi']
             penulis = data_skripsi.iloc[i]['Penulis']
+            nim = data_skripsi.iloc[i]['NIM']
             abstrak = data_skripsi.iloc[i]['Abstrak']
             score = combined_scores[i]
-            rekomendasi.append((judul, link, penulis, abstrak, score))
+            dospem1 = data_skripsi.iloc[i]["Dospem1"]
+            dospem2 = data_skripsi.iloc[i]["Dospem2"]
+            rekomendasi.append((judul, link, penulis, nim, abstrak, score, dospem1, dospem2))
         
         return rekomendasi
 
@@ -254,13 +298,15 @@ if nav == '🔍 Rekomendasi Skripsi':
                 st.write(f"Hasil rekomendasi skripsi yang mungkin Anda sukai berdasarkan '{keyword}':")
                 
                 # Menampilkan hasil dalam bentuk tabel
-                for index, (judul, link, penulis, abstrak, score) in enumerate(hasil_rekomendasi, 1):
+                for index, (judul, link, penulis, nim, abstrak, score, dospem1, dospem2) in enumerate(hasil_rekomendasi, 1):
                     st.write(f"### Rekomendasi ke-{index}:")
                     st.write(f"**Judul**: {judul}")
                     st.write(f"**Link**: {link}")
-                    st.write(f"**Penulis**: {penulis}")
+                    st.write(f"**Penulis**: {penulis} ({nim})")
                     st.write(f"**Abstrak**: {abstrak}")
                     st.write(f"**Score**: {score:.4f}")
+                    st.write(f"**Dosen Pembimbing 1**: {dospem1}")
+                    st.write(f"**Dosen Pembimbing 2**: {dospem2}")
                     st.markdown('___')
         else:
             st.warning("Masukkan keyword untuk mendapatkan rekomendasi.")
