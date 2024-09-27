@@ -141,7 +141,7 @@ if nav == '📊 Grafik Dosen Pembimbing':
                         "type": "scroll",  # Tambahkan scroll untuk legend
                         "left": "left",  # Legend tetap di tengah
                         "top": "bottom",  # Legend di bagian bawah chart
-                        "padding": [10, 10, 30, 10],
+                        "padding": [10, 10, 10, 10],
                     },
                     "series": [
                         {
