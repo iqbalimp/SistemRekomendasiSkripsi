@@ -195,7 +195,7 @@ if nav == '📊 Grafik Dosen Pembimbing':
         },
         "legend": {
             "data": ["Dospem 1", "Dospem 2"],
-            "top": "10%"
+            "top": "2%"
         },
         "grid": {
             "left": "3%",
