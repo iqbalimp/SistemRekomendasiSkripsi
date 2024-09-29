@@ -45,6 +45,8 @@ if nav == '📄 Data Skripsi':
 
     # Tampilkan editor untuk data skripsi
     st.title("Data Skripsi Prodi Sistem Informasi")
+    st.markdown('___')
+
 
     edited_data = st.data_editor(
         data_skripsi[['No.', 'Link Skripsi', 'Judul Skripsi', 'Penulis', 'NIM', 'Tahun', 'Abstrak', 'Dospem1', 'Dospem2']],
@@ -69,6 +71,7 @@ if nav == '📊 Grafik Dosen Pembimbing':
     df = pd.DataFrame(data_skripsi[['Judul Skripsi', 'Dospem1', 'Dospem2', 'Abstrak']])
     all_tags = set(df['Dospem1']).union(set(df['Dospem2']))
     st.title('Filter Skripsi Berdasarkan Dosen Pembimbing')
+    st.markdown('___')
     selected_tags = st.multiselect('Pilih Dosen Pembimbing:', options=list(all_tags))
     if selected_tags:
         filtered_df = df[df.apply(lambda row: any(dospem in selected_tags for dospem in [row['Dospem1'], row['Dospem2']]), axis=1)]
@@ -77,21 +80,21 @@ if nav == '📊 Grafik Dosen Pembimbing':
     st.write('Hasil Skripsi:')
     st.dataframe(filtered_df)
 
-    # Hitung jumlah kemunculan setiap dosen sebagai Dosen Pembimbing 1
+
+
+    #PIE CHART
+    #kemunculan setiap dosen sebagai Dosen Pembimbing 1
     dospem1_count = data_skripsi['Dospem1'].value_counts()
-    # Hitung jumlah kemunculan setiap dosen sebagai Dosen Pembimbing 2
+    #kemunculan setiap dosen sebagai Dosen Pembimbing 2
     dospem2_count = data_skripsi['Dospem2'].value_counts()
     total_dospem_count = dospem1_count.add(dospem2_count, fill_value=0)
-
-
     #PIECHART GABUNGAN JUMLAH TOTAL SKRIPSI YANG TELAH DI BIMBING DOSEN
     total_dospem_counts = dospem1_count.add(dospem2_count, fill_value=0)
     # Format data untuk pie chart
     pie_data = [{"value": int(count), "name": dospem} for dospem, count in total_dospem_counts.items()]
-
-    st.markdown("### Total Skripsi Dosen Pembimbing")
+    st.title('Total Skripsi Dosen Pembimbing dengan Pie Chart')
+    st.markdown('___')
     st.markdown("Geser Zoom level di bawah agar lebih nyaman melihat piechart.")
-
     zoom_level = st.slider("Zoom Level", min_value=40, max_value=100, value=60, step=5)
     # Pie chart options
     options = {
@@ -157,37 +160,94 @@ if nav == '📊 Grafik Dosen Pembimbing':
     }
     s = st_echarts(options=options, events=events, height="600px", key="render_pie_events")
 
-    # Plot grafik batang untuk Dosen Pembimbing 1
-    st.write("### Distribusi Dosen Pembimbing 1")
-    fig, ax = plt.subplots(figsize=(10, 6))
-    dospem1_count.plot(kind='bar', color='lightcoral', ax=ax)
-    # Judul dan label sumbu untuk grafik Dosen Pembimbing 1
-    ax.set_title('Distribusi Dosen Pembimbing 1', fontsize=14)
-    ax.set_xlabel('Nama Dosen Pembimbing 1', fontsize=12)
-    ax.set_ylabel('Jumlah Skripsi Dibimbing', fontsize=12)
-    # Menambahkan keterangan jumlah skripsi di atas setiap batang untuk Dospem 1
-    for index, value in enumerate(dospem1_count):
-        ax.text(index, value + 0.1, str(value), ha='center', fontsize=10)
 
-    # Menampilkan grafik di Streamlit
-    plt.xticks(rotation=45, ha='right')
-    st.pyplot(fig)
+    #BARCHARTDETAIL
+    
+    st.title("Total Bimbingan Skripsi Dosen dengan Stacked Bar Chart")
+    st.markdown('___')
+    dospem1 = data_skripsi['Dospem1']
+    dospem2 = data_skripsi['Dospem2']
+    all_dosen = pd.concat([dospem1_count, dospem2_count], axis=1).fillna(0)
+    all_dosen.columns = ['Dospem 1', 'Dospem 2']
 
-    # Plot grafik batang untuk Dosen Pembimbing 2
-    st.write("### Distribusi Dosen Pembimbing 2")
-    fig, ax = plt.subplots(figsize=(10, 6))
-    dospem2_count.plot(kind='bar', color='lightblue', ax=ax)
-    # Judul dan label sumbu untuk grafik Dosen Pembimbing 2
-    ax.set_title('Distribusi Dosen Pembimbing 2', fontsize=14)
-    ax.set_xlabel('Nama Dosen Pembimbing 2', fontsize=12)
-    ax.set_ylabel('Jumlah Skripsi Dibimbing', fontsize=12)
-    # Menambahkan keterangan jumlah skripsi di atas setiap batang untuk Dospem 2
-    for index, value in enumerate(dospem2_count):
-        ax.text(index, value + 0.1, str(value), ha='center', fontsize=10)
+    # Membuat daftar semua dosen (termasuk yang tidak ada di salah satu kolom)
+    all_dosen_names = pd.Series(pd.concat([dospem1, dospem2]).unique())
 
-    # Menampilkan grafik di Streamlit
-    plt.xticks(rotation=45, ha='right')
-    st.pyplot(fig)
+    # Pastikan bahwa setiap nama dosen ada dalam all_dosen
+    for dosen in all_dosen_names:
+        if dosen not in all_dosen.index:
+            all_dosen.loc[dosen] = [0, 0]  # Menambahkan dosen baru dengan nilai 0
+
+    # Menyusun nama dosen dan data untuk ECharts
+    dosen_names = all_dosen.index.tolist()
+    all_dosen['Total'] = all_dosen['Dospem 1'] + all_dosen['Dospem 2']
+
+    # Mengonversi jumlah skripsi menjadi list dan menyiapkan dosen names
+    all_dosen['Total'] = all_dosen['Dospem 1'] + all_dosen['Dospem 2']
+    dosen_names = all_dosen.index.tolist()  # Mengambil nama dosen tanpa duplikasi
+    # Opsi untuk ECharts bar chart
+    options = {
+        "backgroundColor": "white",
+        "tooltip": {
+            "trigger": "axis",
+            "axisPointer": {"type": "shadow"},
+            "formatter": '{b}<br/>Dospem 1: {c0}<br/>Dospem 2: {c1}',
+        },
+        "legend": {
+            "data": ["Dospem 1", "Dospem 2"],
+            "top": "10%"
+        },
+        "grid": {
+            "left": "3%",
+            "right": "4%",
+            "bottom": "3%",
+            "containLabel": True
+        },
+        "xAxis": {
+            "type": "value",
+            "name": "Jumlah Skripsi"
+        },
+        "yAxis": {
+            "type": "category",
+            "data": dosen_names,
+            "name": "Nama Dosen"
+        },
+        "series": [
+            {
+                "name": "Dospem 1",
+                "type": "bar",
+                "stack": "total",
+                "label": {"show": True},
+                "emphasis": {"focus": "series"},
+                "data": all_dosen['Dospem 1'].tolist(),  # Mengubah ke list
+            },
+            {
+                "name": "Dospem 2",
+                "type": "bar",
+                "stack": "total",
+                "label": {"show": True},
+                "emphasis": {"focus": "series"},
+                "data": all_dosen['Dospem 2'].tolist(),  # Mengubah ke list
+                "itemStyle": {
+                    "color": "lightgreen"  # Warna untuk Dospem 2
+                }
+            }
+        ],
+        "dataZoom": [
+            {
+                "type": "slider",  # Tipe zoom adalah slider
+                "show": True,
+                "start": 0,  # Persentase awal zoom
+                "end": 100,  # Persentase akhir zoom
+                "yAxisIndex": [0],  # Mengaktifkan zoom pada sumbu y
+            },
+            {
+                "type": "inside",  # Zoom dapat dilakukan dengan scroll mouse
+                "yAxisIndex": [0]
+            }
+        ]
+    }
+    st_echarts(options=options, height="500px")
 
 if nav == '🔍 Rekomendasi Skripsi':
 
