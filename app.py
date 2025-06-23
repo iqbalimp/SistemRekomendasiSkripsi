@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import re
-import matplotlib.pyplot as plt
 import streamlit as st
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
@@ -38,6 +37,7 @@ if nav == '🏠 Homepage':
 if nav == '📄 Data Skripsi':
 
     data_skripsi = pd.read_csv('cleaned_data_skripsi.csv')
+    # data_skripsi = pd.read_csv('cleaned_data_skripsi.csv', error_bad_lines=False, warn_bad_lines=True)
 
     # Filter hanya baris yang memiliki abstrak
     data_skripsi = data_skripsi[data_skripsi['Abstrak'].notnull()]
@@ -253,49 +253,96 @@ if nav == '🔍 Rekomendasi Skripsi':
 
     # Fungsi untuk membersihkan teks
     def text_clean(text):
-        factory = StemmerFactory()
-        stemmer = factory.create_stemmer()
-        sastrawi = StopWordRemoverFactory()
-        stopworda = sastrawi.get_stop_words()
+        # CASEFOLDING
+        text = text.lower()  # Mengubah teks menjadi huruf kecil
+        
+        # TOKENIZING
+        tokens = text.split()  # Memecah teks menjadi token
         clean_spcl = re.compile('[/(){}\[\]\|@,;]')
         clean_symbol = re.compile('[^0-9a-z #+_]')
-        text = text.lower()
-        text = clean_spcl.sub(' ', text)
-        text = clean_symbol.sub('', text)
-        text = stemmer.stem(text)
-        text = ' '.join(word for word in text.split() if word not in stopworda)
+        
+        # Menghapus simbol-simbol khusus dari setiap token
+        tokens = [clean_spcl.sub(' ', token) for token in tokens]
+        tokens = [clean_symbol.sub('', token) for token in tokens]
+        
+        # Stopwords removal atau FILTERING
+        sastrawi = StopWordRemoverFactory()
+        stopworda = sastrawi.get_stop_words()
+        tokens = [word for word in tokens if word not in stopworda]  # Menghapus stopwords
+        
+        # STEMMING
+        factory = StemmerFactory()
+        stemmer = factory.create_stemmer()
+        tokens = [stemmer.stem(token) for token in tokens]  # Stemming
+        
+        # Join tokens menjadi string kembali
+        text = ' '.join(tokens)
         return text
 
-    def recommendations(keyword, top=10):
+    def recommendations(keyword):
         rekomendasi = []
         cleaned_keyword = text_clean(keyword)
+
+        # Membagi keyword input menjadi daftar kata kunci
+        keyword_tokens = set(cleaned_keyword.split())
+        num_keywords = len(keyword_tokens)
 
         # TF-IDF untuk input keyword
         tfidf_keyword_judul = tfidf_vectorizer_judul.transform([cleaned_keyword])
         tfidf_keyword_abstrak = tfidf_vectorizer_abstrak.transform([cleaned_keyword])
-        
+
         # Menghitung cosine similarity
         scores_judul = cosine_similarity(tfidf_matrix_judul, tfidf_keyword_judul).flatten()
         scores_abstrak = cosine_similarity(tfidf_matrix_abstrak, tfidf_keyword_abstrak).flatten()
-        
+
         # Menjumlahkan skor dari judul dan abstrak
         combined_scores = scores_judul + scores_abstrak
-        
+
         # Mengurutkan berdasarkan skor tertinggi
         sorted_indexes = np.argsort(combined_scores)[::-1]
-        
+
         # Mendapatkan rekomendasi berdasarkan top skor
-        for i in sorted_indexes[:top]:
-            judul = data_skripsi.iloc[i]['Judul Skripsi']
-            link = data_skripsi.iloc[i]['Link Skripsi']
-            penulis = data_skripsi.iloc[i]['Penulis']
-            nim = data_skripsi.iloc[i]['NIM']
-            abstrak = data_skripsi.iloc[i]['Abstrak']
-            score = combined_scores[i]
-            dospem1 = data_skripsi.iloc[i]["Dospem1"]
-            dospem2 = data_skripsi.iloc[i]["Dospem2"]
-            rekomendasi.append((judul, link, penulis, nim, abstrak, score, dospem1, dospem2))
-        
+        for i in sorted_indexes:
+            if combined_scores[i] > 0:
+                # Mendapatkan judul dan abstrak skripsi
+                judul = data_skripsi.iloc[i]['cleaned_judul']
+                abstrak = data_skripsi.iloc[i]['cleaned_abstrak']
+                judul_tokens = set(judul.split())
+                abstrak_tokens = set(abstrak.split())
+
+                # Filter berdasarkan jumlah kata kunci
+                if num_keywords < 3:
+                    # Jika kurang dari 3 kata kunci, gunakan `issubset`
+                    if keyword_tokens.issubset(judul_tokens) or keyword_tokens.issubset(abstrak_tokens):
+                        # Tambahkan ke rekomendasi jika relevan
+                        original_judul = data_skripsi.iloc[i]['Judul Skripsi']
+                        link = data_skripsi.iloc[i]['Link Skripsi']
+                        penulis = data_skripsi.iloc[i]['Penulis']
+                        nim = data_skripsi.iloc[i]['NIM']
+                        original_abstrak = data_skripsi.iloc[i]['Abstrak']
+                        score = combined_scores[i]
+                        dospem1 = data_skripsi.iloc[i]["Dospem1"]
+                        dospem2 = data_skripsi.iloc[i]["Dospem2"]
+                        rekomendasi.append((original_judul, link, penulis, nim, original_abstrak, score, dospem1, dospem2))
+                else:
+                    # Jika 3 kata kunci atau lebih, gunakan partial match dengan 50% kecocokan
+                    intersection_judul = keyword_tokens.intersection(judul_tokens)
+                    intersection_abstrak = keyword_tokens.intersection(abstrak_tokens)
+                    match_percentage_judul = len(intersection_judul) / num_keywords
+                    match_percentage_abstrak = len(intersection_abstrak) / num_keywords
+
+                    if match_percentage_judul >= 0.6 or match_percentage_abstrak >= 0.6:
+                        # Tambahkan ke rekomendasi jika relevan
+                        original_judul = data_skripsi.iloc[i]['Judul Skripsi']
+                        link = data_skripsi.iloc[i]['Link Skripsi']
+                        penulis = data_skripsi.iloc[i]['Penulis']
+                        nim = data_skripsi.iloc[i]['NIM']
+                        original_abstrak = data_skripsi.iloc[i]['Abstrak']
+                        score = combined_scores[i]
+                        dospem1 = data_skripsi.iloc[i]["Dospem1"]
+                        dospem2 = data_skripsi.iloc[i]["Dospem2"]
+                        rekomendasi.append((original_judul, link, penulis, nim, original_abstrak, score, dospem1, dospem2))
+
         return rekomendasi
 
     # Load data skripsi yang sudah dibersihkan
@@ -312,11 +359,8 @@ if nav == '🔍 Rekomendasi Skripsi':
     # Streamlit UI
     st.title('Sistem Rekomendasi Skripsi')
 
-
     with st.form(key='rekomendasi_form'):
         keyword = st.text_input("Masukkan keyword untuk mencari skripsi:")
-        jumlah_rekomendasi = st.slider("Jumlah rekomendasi yang diinginkan:", 1, 20, 10)
-        
         # Tombol untuk submit form
         submit_button = st.form_submit_button(label='Cari Rekomendasi')
 
@@ -328,22 +372,26 @@ if nav == '🔍 Rekomendasi Skripsi':
         if keyword:
             results_placeholder.empty()
 
-            hasil_rekomendasi = recommendations(keyword, jumlah_rekomendasi)
+            hasil_rekomendasi = recommendations(keyword)
 
             with results_placeholder.container():
                 st.write(f"Hasil rekomendasi skripsi yang mungkin Anda sukai berdasarkan '{keyword}':")
                 
-                # Menampilkan hasil dalam bentuk tabel
-                for index, (judul, link, penulis, nim, abstrak, score, dospem1, dospem2) in enumerate(hasil_rekomendasi, 1):
-                    st.write(f"### Rekomendasi ke-{index}:")
-                    st.write(f"**Judul**: {judul}")
-                    st.write(f"**Link**: {link}")
-                    st.write(f"**Penulis**: {penulis} ({nim})")
-                    st.write(f"**Abstrak**: {abstrak}")
-                    st.write(f"**Score**: {score:.4f}")
-                    st.write(f"**Dosen Pembimbing 1**: {dospem1}")
-                    st.write(f"**Dosen Pembimbing 2**: {dospem2}")
-                    st.markdown('___')
+                if hasil_rekomendasi:
+                    # Menampilkan hasil dalam bentuk tabel
+                    for index, (judul, link, penulis, nim, abstrak, score, dospem1, dospem2) in enumerate(hasil_rekomendasi, 1):
+                        st.write(f"### Rekomendasi ke-{index}:")
+                        st.write(f"**Judul**: {judul}")
+                        st.write(f"**Link**: {link}")
+                        st.write(f"**Penulis**: {penulis} ({nim})")
+                        st.write(f"**Abstrak**: {abstrak}")
+                        st.write(f"**Score**: {score:.4f}")
+                        st.write(f"**Dosen Pembimbing 1**: {dospem1}")
+                        st.write(f"**Dosen Pembimbing 2**: {dospem2}")
+                        st.markdown('___')
+                else:
+                    st.write("Tidak ada skripsi yang relevan dengan keyword yang dimasukkan.")
         else:
             st.warning("Masukkan keyword untuk mendapatkan rekomendasi.")
+
 
